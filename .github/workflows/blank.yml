@@ -1,0 +1,19 @@
+name: Dev VM
+
+on:
+  workflow_dispatch:
+
+jobs:
+  vm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install cloudflared
+        run: |
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
+          chmod +x cloudflared
+      - name: Start SSH tunnel
+        run: |
+          sudo apt update
+          sudo apt install -y openssh-server
+          sudo service ssh start
+          ./cloudflared tunnel --url ssh://localhost:22
