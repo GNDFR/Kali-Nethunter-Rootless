@@ -1,0 +1,22 @@
+name: Free VM on GitHub Actions
+
+on:
+  workflow_dispatch: # 수동 실행 가능
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check system info
+        run: |
+          echo "CPU 정보:"
+          lscpu
+          echo "메모리:"
+          free -h
+          echo "디스크:"
+          df -h
+
+      - name: Run your commands
+        run: |
+          echo "원하는 명령어를 여기에 작성하세요"
+          uname -a
